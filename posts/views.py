@@ -13,9 +13,4 @@ POSTS = [
 ]
 
 def get_posts(request):
-    all_posts = []
-
-    for post in POSTS:
-        all_posts.append(post)
-
-    return JsonResponse(all_posts, safe=False)
+    return JsonResponse(POSTS)
