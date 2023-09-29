@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import User
@@ -5,7 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 
 
-def create_posts(request):
+
+def create_user(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')
         age = request.POST.get('age', '')
@@ -17,7 +19,7 @@ def create_posts(request):
     else:
         return JsonResponse({'message': 'Invalid data'}, status=400)
     
-def get_posts(request, user_id=None):
+def get_user(request, user_id=None):
     if request.method == 'GET':
         if user_id is not None:
             user = get_object_or_404(User, id=user_id)
@@ -28,6 +30,38 @@ def get_posts(request, user_id=None):
         return JsonResponse(data, safe=False)
     else:
         return JsonResponse({'message': 'Invalid data'}, status=400)
+    
+def update_user(request, user_id):
+    if request.method == 'PUT':
+        try:
+            data = json.loads(request.body)
+            username = data.get('username', '')
+            age = data.get('age', '')
+
+            user = User.objects.filter(id=user_id).first()
+            if user:
+                user.username = username
+                user.age = age
+                user.save()
+                return JsonResponse({'message': 'User updated successfully'})
+            else:
+                return JsonResponse({'message': 'User not found'}, status=404)
+        except json.JSONDecodeError:
+            return JsonResponse({'message': 'Invalid JSON data'}, status=400)
+    else:
+        return JsonResponse({'message': 'Invalid request method'}, status=400)
+    
+def delete_user(request, user_id):
+    if request.method == 'DELETE':
+        user = User.objects.filter(id=user_id).first()
+        if user:
+            user.delete()
+            return JsonResponse({'message': 'User deleted successfully'})
+        else:
+            return JsonResponse({'message': 'User not found'}, status=404)
+    else:
+        return JsonResponse({'message': 'Invalid request method'}, status=400)
+
 
 
 
@@ -51,3 +85,6 @@ def get_posts(request, user_id=None):
 #     for i in posts:
 #           res['data'].append({'title': i.title, 'text': i.text})
 #     return JsonResponse(res)
+
+
+
