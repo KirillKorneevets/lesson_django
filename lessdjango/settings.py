@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'lessdjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'lessdjango',
+        'NAME': 'less_django',
         'USER': 'postgres',
         'PASSWORD': 'Asdcvbjkl763',
         'HOST': '127.0.0.1',
