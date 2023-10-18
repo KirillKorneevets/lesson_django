@@ -46,23 +46,3 @@ def post(request):
 
 
 
-
-    #     with transaction.atomic():
-    #         if sender_wallet.balance >= amount:
-    #             sender_wallet -= amount
-    #             sender_wallet.save()
-
-    #             recipient_wallet.balance += amount
-    #             recipient_wallet.save()
-    #         else:
-    #             raise Exception('Insufficient funds')
-        
-
-    # def post(self, request):
-    #     if request.method == 'POST':
-    #         data = json.loads(request.body)
-    #         username = data.get('username', '')
-    #         age = data.get('age', '')
-
-    #         new_user = User(username=username, age=age)
-    #         new_user.save()
