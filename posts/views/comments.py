@@ -1,6 +1,7 @@
 import json
 from django.http import JsonResponse
-from .models import Posts, PostsComments
+from posts.models import Posts, PostsComments
+from django.views import View
 
 
 def create_posts(request):
