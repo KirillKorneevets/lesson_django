@@ -62,3 +62,29 @@ class UserViews(View):
                 return JsonResponse({'message': 'User not found'}, status=404)
         else:
             return JsonResponse({'message': 'Invalid request method'}, status=400)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -70,20 +70,18 @@ TEMPLATES = [
             ],
         },
     },
+    
+    {
+		"BACKEND": "django.template.backends.jinja2.Jinja2",
+		"DIRS": [],
+		"APP_DIRS": True,
+		"OPTIONS": {
+			"environment": "lessdjango.myjinja2.environment"
+		}
+	},
 ]
 
 WSGI_APPLICATION = 'lessdjango.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
