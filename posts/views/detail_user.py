@@ -1,7 +1,7 @@
 from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from posts.models import User
+from posts.models import User, Wallet
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
@@ -10,7 +10,7 @@ from django.urls import reverse
 class DetailUser(View):
 
     def get(self, request):
-        users = User.objects.all()
+        users = User.objects.all().order_by('id')
         template = loader.get_template("user/user.html")
         context = {"users": users}
         rendered_html = template.render(context)
@@ -54,3 +54,14 @@ class СhangeUser(View):
         
     def get(self, request):
         return render(request, "user/change_user.html")
+
+
+
+class WalletView(View):
+
+    def get(self, request):
+        wallets = Wallet.objects.all().order_by('id')
+        template = loader.get_template("user/wallets.html")
+        context = {"wallets": wallets}
+        rendered_html = template.render(context)
+        return HttpResponse(rendered_html)

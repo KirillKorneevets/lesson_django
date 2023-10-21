@@ -19,6 +19,7 @@ urlpatterns = [
     path("registration-users/", detail_user.RegistrationView.as_view(), name='registration-users'),
     path("get_users/", detail_user.DetailUser.as_view(), name='get_users'),
     path("edit_user/", detail_user.СhangeUser.as_view(), name='edit_user'),
+    path("wallet_user/", detail_user.WalletView.as_view(), name='wallet_user'),
 
 
     ]
