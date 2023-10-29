@@ -7,7 +7,7 @@ from posts.models import User, Wallet
 @receiver(post_save, sender=User)
 def create_wallet(sender, instance, created, **kwargs):
     if created:
-        Wallet.objects.create(user=instance, balance=0)
+        Wallet.objects.create(user=instance, balance=1000)
 
 
     # sender: Этот аргумент указывает на класс модели, который инициировал событие. В данном случае, это модель User.
