@@ -1,38 +1,46 @@
 import json
 from django.http import JsonResponse
+from django.shortcuts import redirect, render
 from posts.models import Posts, PostsComments
-from django.views import View
+from posts.django_forms.posts_forms import PostsForm
+from posts.django_forms.comments_forms import CommentsForm
+from django.views.generic.base import View
 
 
-def create_posts(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        post = data.get('post', None)
-        text = data.get('text', None)
+class CreatePosts(View):
 
-        if post is not None:
-            new_post = Posts.objects.create(post=post, text=text)
-            return JsonResponse({'message': 'Post created successfully', 'post_id': new_post.id})
+    def post(self, request):
+        form = PostsForm(request.POST)
+        if form.is_valid():
+            post_data = form.cleaned_data
+
+            new_post = Posts.objects.create(post=post_data['post'], text=post_data['text'])
+            
+            return redirect('create_posts')
         else:
-            return JsonResponse({'message': 'Invalid data. Post data is missing.'}, status=400)
-    else:
-        return JsonResponse({'message': 'Invalid request method'}, status=400)
+            return JsonResponse({'message': 'Invalid data'}, status=400)
+    
+    def get (self, request):
+        form = PostsForm()
+        return render(request, 'posts_forms.html', {'form': form}) 
 
 
 
 
-def create_comments(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        post_id = data.get('post_id', '')
-        comments = data.get('comments', '')
+class CreateComments(View):
+    def post(self, request):
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            comment_data = form.cleaned_data
 
-        if post_id is not None:
-            post = PostsComments(post_id=post_id, text=comments)
-            post.save()
-            return JsonResponse({'message': 'Comments created successfully'})
-    else:
-        return JsonResponse({'message': 'Invalid request method'}, status=400)
+            new_comment = PostsComments.objects.create(post_id=comment_data['post_id'], text=comment_data['text'])
+
+            return redirect('create_posts')
+        
+    def get(self, request):
+        form = CommentsForm()
+        return render(request, 'comments_forms.html', {'form': form})
+
 
 
 def get_comment(request, post_id):

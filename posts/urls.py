@@ -10,8 +10,8 @@ urlpatterns = [
     path("update/<int:user_id>/", user.UserViews.as_view()),
     path("delete/<int:user_id>/", user.UserViews.as_view()),
 
-    path("create_posts/", comments.create_posts),
-    path("create_comments/", comments.create_comments),
+    path("create_posts/", comments.CreatePosts.as_view(), name='create_posts'),
+    path("create_comments/", comments.CreateComments.as_view(), name='create_comments'),
     path("get_comment/<int:post_id>/", comments.get_comment),
 
     path("transaction/", wallet.post),
