@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Details</title>
+</head>
+<body>
+    <h1>User List from database</h1>
+    <ul>
+        {% for user in users %}
+            <li>
+                (ID - {{ user.id }}) Username: {{ user.username }} - Age: {{ user.age }}  
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="button-container">
+        <a href="{{ url('registration-users') }}" class="btn btn-primary">Создать пользователя</a>
+    </div>
+    <div class="button-container">
+        <a href="{{ url('edit_user') }}" class="btn btn-primary">Редактировать</a>
+    </div>
+    <div class="button-container">
+        <a href="{{ url('wallet_user') }}" class="btn btn-primary">Баланс пользователей</a>
+    </div>
+</body>
+</html>
+
+
+

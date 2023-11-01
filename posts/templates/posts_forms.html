@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head>
+    <title>Создать пост</title>
+</head>
+<body>
+    <h1>Создать новый пост</h1>
+    <form method="post" action="{% url 'create_posts' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+</body>
+</html>

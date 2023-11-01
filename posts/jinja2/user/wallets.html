@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wallets</title>
+</head>
+<body>
+    <h1>Wallets balance</h1>
+    <ul>
+        {% for wallet in wallets %}
+            <li>
+                (Номер кошелька - {{ wallet.id }})   Баланс: {{ wallet.balance }} Рублей - UserID: {{ wallet.user_id }}  
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="button-container">
+        <a href="{{ url('get_users') }}" class="btn btn-primary">Список пользователей</a>
+    </div>
+</body>
+</html>
