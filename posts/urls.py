@@ -1,5 +1,6 @@
 from django.urls import path
-from posts.views import user, comments, wallet, detail_user
+from posts.views import user, comments, wallet, detail_user, user_serializer_detail
+
 
 
 
@@ -21,6 +22,10 @@ urlpatterns = [
     path("edit_user/", detail_user.СhangeUser.as_view(), name='edit_user'),
     path("wallet_user/", detail_user.WalletView.as_view(), name='wallet_user'),
 
+    path("new_create_user/", user_serializer_detail.UserList.as_view(), name='new_create_user'),
+    path("new_read_user/<int:pk>/", user_serializer_detail.UserDetail.as_view(), name='new_read_user'),
+    path("new_update_user/<int:pk>/", user_serializer_detail.UserDetail.as_view(), name='new_update_user'),
+    path("new_delete_user/<int:pk>/", user_serializer_detail.UserDetail.as_view(), name='new_delete_user'),
 
     ]
 
